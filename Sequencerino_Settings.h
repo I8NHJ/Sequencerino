@@ -20,6 +20,8 @@
 
 
 /* PROGRAM FEATURES */
+#define PTT_2_ENABLED
+
 // #define DIGITAL_OUTPUT
 // #define PWM_OUTPUT
 // #define SLOW_START_STOP

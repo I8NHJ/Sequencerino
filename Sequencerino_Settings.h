@@ -8,34 +8,30 @@
 // #define NEXTION_PORT_MAPPED_TO &Serial3
 // #define NEXTION_PORT_BAUD_RATE 115200
 
-/* TIMING CONFIGURATION */
-#define PTT_IN_1_RATE 0
-#define PTT_IN_2_RATE 0
-#define PTT_OUT_1_DELAY 0
-#define PTT_OUT_2_DELAY 50
-#define PTT_OUT_3_DELAY 100
-#define PTT_OUT_4_DELAY 150
-#define DC_CONTROL_1_DELAY 0
-#define DC_CONTROL_2_DELAY 100
-
-
 /* PROGRAM FEATURES */
-#define PTT_2_ENABLED
+//#define PTT_2_ENABLED
 
-// #define DIGITAL_OUTPUT
-// #define PWM_OUTPUT
-// #define SLOW_START_STOP
-// #define PTT_AUTOMATION
-// #define EXTERNAL_REFERENCE
-// #define ONE_ANTENNA  // NOT IMPLEMENTED YET
+/* TIMING CONFIGURATION */
+struct timing {
+  unsigned int PTT_IN_RATE = 100;
+  unsigned int PTT_OUT_1_DELAY_ON = 0;
+  unsigned int PTT_OUT_2_DELAY_ON = 50;
+  unsigned int PTT_OUT_3_DELAY_ON = 100;
+  unsigned int PTT_OUT_4_DELAY_ON = 150;
+  unsigned int DC_CONTROL_1_DELAY_ON = 0;
+  unsigned int DC_CONTROL_2_DELAY_ON = 100;
+  unsigned int PTT_OUT_1_DELAY_OFF = 0;
+  unsigned int PTT_OUT_2_DELAY_OFF = 50;
+  unsigned int PTT_OUT_3_DELAY_OFF = 100;
+  unsigned int PTT_OUT_4_DELAY_OFF = 150;
+  unsigned int DC_CONTROL_1_DELAY_OFF = 0;
+  unsigned int DC_CONTROL_2_DELAY_OFF = 100;
+  unsigned int DEBOUNCE_DELAY = 10;
+};
 
 
-/* OPTIONS CONFIGURATION */
-// #define PWM_SPEED 255
-// #define SLOW_START_STOP_MIN 50
-// #define SLOW_START_STOP_DELAY 200
-// #define SLOW_START_STOP_STEPS 50
-// #define SLOW_START_STOP_PROXIMITY 3
+
+
 
 
 

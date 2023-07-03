@@ -11,3 +11,5 @@
 /*-------- DC OUT pins definitions --------*/
 #define dc_control_1 18      // Carries 12V when PTT active
 #define dc_control_2 19
+
+#define builtin_led 13        // Arduino built In LED 

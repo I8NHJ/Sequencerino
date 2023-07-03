@@ -48,6 +48,8 @@ void initialize_serial() {
 } /* END initialize_serial() */
 
 void initialize_pins() {
+  // interal LED
+  pinMode(builtin_led, OUTPUT);
   // define pins
   pinMode(ptt_in_1, INPUT_PULLUP);
   #if defined (PTT_2_ENABLED)
@@ -61,6 +63,7 @@ void initialize_pins() {
   pinMode(dc_control_2, OUTPUT);
 
   // set output controls to low
+  digitalWrite(builtin_led, LOW);
   digitalWrite(ptt_out_1, LOW);
   digitalWrite(ptt_out_2, LOW);
   digitalWrite(ptt_out_3, LOW);

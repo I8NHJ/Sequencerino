@@ -1,15 +1,29 @@
 /*-------- PTT IN pins definitions --------*/
-#define ptt_in_1 2                  // Ground to activate
-#define ptt_in_2 3                  // Ground to activate
+#define ptt_in_0 2                          // Ground to activate
+#define ptt_in_1 3                          // Ground to activate
 
-/* SEQUENCED PTT OUT pins definition */
-#define ptt_out_1 5                 // Grounded when active
-#define ptt_out_2 6
-#define ptt_out_3 7
-#define ptt_out_4 8
+/*-------- Sequenced PTT OUT pins definitions --------*/
+#define ptt_out_0 5                         // Grounded when active
+#define ptt_out_1 6
+#define ptt_out_2 7
+#define ptt_out_3 8
 
 /*-------- DC OUT pins definitions --------*/
-#define dc_control_1 18      // Carries 12V when PTT active
-#define dc_control_2 19
+#define dc_control_0 9                     // If enabled carries 12V when PTT active
+#define dc_control_1 10                     // If enabled carries 12V when PTT active
 
-#define builtin_led 13        // Arduino built In LED 
+/*-------- LEDs pins definitions --------*/
+#define ptt_in_0_engaged_led 11              // set to 0 to disable 
+#define ptt_in_1_engaged_led 12            
+
+#define sequence_completed_led 13           // Arduino built In LED   
+
+#define ptt_out_0_engaged_led 14
+#define ptt_out_1_engaged_led 15
+#define ptt_out_2_engaged_led 16
+#define ptt_out_3_engaged_led 17
+
+#define dc_0_engaged_led 18
+#define dc_1_engaged_led 19
+
+     

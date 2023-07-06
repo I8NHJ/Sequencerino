@@ -12,58 +12,55 @@
 */
  
 #define CODE_VERSION "V1-" __DATE__ " N5NHJ"
-// #define DEBUG
 
 #define CONTROL_PORT_SERIAL_PORT_CLASS HardwareSerial
 // #define NEXTION_PORT_SERIAL_PORT_CLASS HardwareSerial
 
-#include <EEPROM.h>
+
 
 #include "Sequencerino_Settings.h"
 #include "Sequencerino_Pins.h"
-// #include "FaraRotation_Commands.h"
 #include "Sequencerino_Enums.h"
+
+#ifdef USE_EEPROM
+  #include <EEPROM.h>
+#endif
 
 /*-------- VARIABLES --------*/
 CONTROL_PORT_SERIAL_PORT_CLASS *control_port;
-
 // NEXTION_PORT_SERIAL_PORT_CLASS *nextion_port;
 // char nextion_port_buffer[COMMAND_BUFFER_SIZE];
 
 unsigned long last_ptt_checking_time = 0;
+unsigned long ptt_engagement_time = 0;
+unsigned long ptt_deengagement_time = 0;
+unsigned long last_sequence_completed_time = 0;
 
-//struct Conf {
-//  unsigned int Ptt_in;
-//  unsigned int Ptt_out_1;
-//  unsigned int Ptt_out_2;
-//  unsigned int Ptt_out_3;
-//  unsigned int Ptt_out_4;
-//  unsigned int Dc_control_1;
-//  unsigned int Dc_control_2;
-//} configuration_data;
+const int ptt_in[2] = {ptt_in_0, ptt_in_1};
+const int ptt_in_led[2] = {ptt_in_0_engaged_led, ptt_in_1_engaged_led};
+// const int ptt_out[4] = {ptt_out_0, ptt_out_1, ptt_out_2, ptt_out_3};
+// const int dc_out[2] = {dc_control_0, dc_control_1};
 
-bool Ptt_1 = false;
-bool Ptt_2 = false;
-bool PTT_1_Engaged = false;
-bool PTT_2_Engaged = false;
+bool PTT_Engaged[2] = {false, false};
 timing delays;
 
+uint8_t engagement_status;
+
 void setup() {
-  initialize_serial();
-  initialize_pins();
-  initialize_eeprom(NOW);
-  // send_info_to_nextion(NOW);
-  // send_status_to_nextion(NOW);
   #ifdef DEBUG
+    initialize_serial();
     control_port->println(CODE_VERSION);
   #endif
+
+  #ifdef USE_EEPROM
+    initialize_eeprom(NOW);
+  #endif
+
+  initialize_pins();
 }
 
 void loop() {
-  check_ptt_status(1,TIMED);
-  // #if defined (PTT_2_ENABLED)
-  //  check_ptt_status(2,TIMED);
-  // #endif
-  // send_info_to_nextion(TIMED);
-  // send_status_to_nextion(TIMED);
+  if (PTT_0_ENABLED) {check_ptt_status(0,TIMED);}
+  if (PTT_1_ENABLED) {check_ptt_status(1,TIMED);}
+  sequence_completed(false);
 }

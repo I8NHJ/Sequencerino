@@ -2,6 +2,7 @@
 
 /* Serial Port Settings */
 #define CONTROL_PORT_MAPPED_TO &Serial
+//#define CONTROL_PORT_MAPPED_TO SerialUSB
 #define CONTROL_PORT_BAUD_RATE 115200
 
 #define DEBUG

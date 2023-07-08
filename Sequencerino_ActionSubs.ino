@@ -36,10 +36,10 @@ void check_ptt_status(unsigned int PttInput, bool when) {
 
             PTT_Engaged[PttInput] = false;
             digitalWrite(ptt_in_led[PttInput], LOW);
-            ptt_deengagement_time = millis();
-            bool DeEngagement_Not_Completed = true;
-            while (DeEngagement_Not_Completed) {
-              DeEngagement_Not_Completed = deengage_ports();
+            ptt_disengagement_time = millis();
+            bool disengagement_Not_Completed = true;
+            while (disengagement_Not_Completed) {
+              disengagement_Not_Completed = disengage_ports();
             }
             sequence_completed(true);
             #ifdef DEBUG
@@ -165,11 +165,11 @@ bool engage_ports() {
   }
 } /* END engage_ports() */
 
-bool deengage_ports() {
+bool disengage_ports() {
   if (PTT_OUT_0_ENABLED) {
-    if (((millis() - ptt_deengagement_time) >= delays.PTT_OUT_0_DELAY_OFF) && (bitRead(engagement_status, 0) == 1) ) {
+    if (((millis() - ptt_disengagement_time) >= delays.PTT_OUT_0_DELAY_OFF) && (bitRead(engagement_status, 0) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| PTT0 |");
         control_port->println (millis());
       #endif
@@ -182,9 +182,9 @@ bool deengage_ports() {
   }
 
   if (PTT_OUT_1_ENABLED) { 
-    if (((millis() - ptt_deengagement_time) >= delays.PTT_OUT_1_DELAY_OFF) && (bitRead(engagement_status, 1) == 1) ) {
+    if (((millis() - ptt_disengagement_time) >= delays.PTT_OUT_1_DELAY_OFF) && (bitRead(engagement_status, 1) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| PTT1 |");
         control_port->println (millis());
       #endif
@@ -197,9 +197,9 @@ bool deengage_ports() {
   }
 
   if (PTT_OUT_2_ENABLED) { 
-    if (((millis() - ptt_deengagement_time) >= delays.PTT_OUT_2_DELAY_OFF) && (bitRead(engagement_status, 2) == 1) ) {
+    if (((millis() - ptt_disengagement_time) >= delays.PTT_OUT_2_DELAY_OFF) && (bitRead(engagement_status, 2) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| PTT2 |");
         control_port->println (millis());
       #endif
@@ -212,9 +212,9 @@ bool deengage_ports() {
   }
 
   if (PTT_OUT_3_ENABLED) { 
-    if (((millis() - ptt_deengagement_time) >= delays.PTT_OUT_3_DELAY_OFF) && (bitRead(engagement_status, 3) == 1) ) {
+    if (((millis() - ptt_disengagement_time) >= delays.PTT_OUT_3_DELAY_OFF) && (bitRead(engagement_status, 3) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| PTT3 |");
         control_port->println (millis());
       #endif
@@ -229,7 +229,7 @@ bool deengage_ports() {
   if (DC_CONTROL_0_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_0_DELAY_ON) && (bitRead(engagement_status, 4) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| DC0 |");
         control_port->println (millis());
       #endif
@@ -244,7 +244,7 @@ bool deengage_ports() {
   if (DC_CONTROL_0_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_1_DELAY_ON) && (bitRead(engagement_status, 5) == 1) ) {
       #ifdef DEBUG
-        control_port->print (ptt_deengagement_time);
+        control_port->print (ptt_disengagement_time);
         control_port->print ("| DC1 |");
         control_port->println (millis());
       #endif
@@ -258,7 +258,7 @@ bool deengage_ports() {
 
   if (engagement_status == B00000000) {
     #ifdef DEBUG
-      control_port->print("DeEngaged ");
+      control_port->print("Disengaged ");
       control_port->println(engagement_status);
     #endif
     return false;
@@ -269,7 +269,7 @@ bool deengage_ports() {
     #endif
     return true;
   }
-} /* END deengage_ports() */
+} /* END disengage_ports() */
 
 void sequence_completed(bool light_on) {
   if (light_on) {

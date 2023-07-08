@@ -33,7 +33,7 @@ CONTROL_PORT_SERIAL_PORT_CLASS *control_port;
 
 unsigned long last_ptt_checking_time = 0;
 unsigned long ptt_engagement_time = 0;
-unsigned long ptt_deengagement_time = 0;
+unsigned long ptt_disengagement_time = 0;
 unsigned long last_sequence_completed_time = 0;
 
 const int ptt_in[2] = {ptt_in_0, ptt_in_1};

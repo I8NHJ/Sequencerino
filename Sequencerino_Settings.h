@@ -2,11 +2,10 @@
 
 /* Serial Port Settings */
 #define CONTROL_PORT_MAPPED_TO &Serial
-//#define CONTROL_PORT_MAPPED_TO SerialUSB
 #define CONTROL_PORT_BAUD_RATE 115200
 
 #define DEBUG
-// #define USE_EEPROM
+// #define USE_EEPROM                 // It can be usefull to add some external configuration methods
 
 /* PROGRAM FEATURES */
 bool PTT_0_ENABLED = true;
@@ -26,7 +25,20 @@ bool PTT_OUT_3_NORMAL_LOW = false;
 bool DC_CONTROL_0_NORMAL_LOW = false;
 bool DC_CONTROL_1_NORMAL_LOW = false;
 
-/* TIMING CONFIGURATION */
+/* TIMING CONFIGURATION 
+  About timing between PTT IN closure and any PPT OUT or DC OUT closure:
+    The closure Delay is the sum of those delays:
+        machine_main_loop (<< microseconds, negligeble) +
+        PTT_IN_RATE (milliseconds, configurable, the timeing the PTT closure is checked) +
+        DEBOUNCE_DELAY (milliseconds, configurable, debounce time to make sure PTT IN has been engaged) +
+        machine_action_loops (microseconds, negligeble) +
+        PTT_OUT_x_DELAY_ON or DC_CONTROL_x_DELAY_ON (milliseconds, configurable, your desidered delay) +
+        relay_operating_time and release_time (milliseconds, the delay of the relay or driving circuit of your choice)
+    This logic applies to both engage and disengage.
+    If you need accurate delay us an oscilloscope or other lab devices to verify.
+    Always BE CONSERVATIVE!
+*/ 
+
 struct timing {
   unsigned int PTT_IN_RATE = 10;
 
@@ -48,9 +60,6 @@ struct timing {
   unsigned int DEBOUNCE_DELAY = 10;
 };
 
-/* Nextion Serial Port Settings */
-// #define NEXTION_PORT_MAPPED_TO &Serial3
-// #define NEXTION_PORT_BAUD_RATE 115200
 
 
 

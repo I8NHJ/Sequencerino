@@ -3,7 +3,7 @@ void check_ptt_status(unsigned int PttInput, bool when) {
   if ((millis() - last_ptt_checking_time) >= delays.PTT_IN_RATE || (when == NOW)) {
       if (!digitalRead(ptt_in[PttInput])) { // False when PTT active because the port is defined as input/pullup
         if (!PTT_Engaged[PttInput]) {
-
+          ptt_activation_time=millis();
           delay (delays.DEBOUNCE_DELAY);
           if (!digitalRead(ptt_in[PttInput])) { 
 
@@ -45,7 +45,7 @@ void check_ptt_status(unsigned int PttInput, bool when) {
             #ifdef DEBUG
               control_port->print("PTT Control ");
               control_port->print(PttInput);
-              control_port->println(" De-Engaged");
+              control_port->println(" Disengaged");
             #endif   
           }
           else {
@@ -63,6 +63,8 @@ bool engage_ports() {
   if (PTT_OUT_0_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.PTT_OUT_0_DELAY_ON) && (bitRead(engagement_status, 0) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
         control_port->print ("| PTT0 |");
         control_port->println (millis());
@@ -78,6 +80,8 @@ bool engage_ports() {
   if (PTT_OUT_1_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.PTT_OUT_1_DELAY_ON) && (bitRead(engagement_status, 1) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
         control_port->print ("| PTT1 |");
         control_port->println (millis());
@@ -93,9 +97,11 @@ bool engage_ports() {
   if (PTT_OUT_2_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.PTT_OUT_2_DELAY_ON) && (bitRead(engagement_status, 2) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
-       control_port->print ("| PTT2 |");
-       control_port->println (millis());
+        control_port->print ("| PTT2 |");
+        control_port->println (millis());
       #endif
       if (PTT_OUT_2_NORMAL_LOW) {digitalWrite(ptt_out_2, HIGH);} else {digitalWrite(ptt_out_2, LOW);}
       bitWrite(engagement_status, 2, 1);
@@ -108,6 +114,8 @@ bool engage_ports() {
   if (PTT_OUT_3_ENABLED) { 
     if (((millis() - ptt_engagement_time) >= delays.PTT_OUT_3_DELAY_ON) && (bitRead(engagement_status, 3) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
         control_port->print ("| PTT3 |");
         control_port->println (millis());
@@ -123,8 +131,10 @@ bool engage_ports() {
   if (DC_CONTROL_0_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_0_DELAY_ON) && (bitRead(engagement_status, 4) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
-        control_port->print ("| DC0 |");
+        control_port->print ("| DC0  |");
         control_port->println (millis());
       #endif
       if (DC_CONTROL_0_NORMAL_LOW) {digitalWrite(dc_control_0, HIGH);} else {digitalWrite(dc_control_0, LOW);}
@@ -138,8 +148,10 @@ bool engage_ports() {
   if (DC_CONTROL_1_ENABLED) {
     if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_1_DELAY_ON) && (bitRead(engagement_status, 5) == 0)) {
       #ifdef DEBUG
+        control_port->print (ptt_activation_time);
+        control_port->print (" | ");
         control_port->print (ptt_engagement_time);
-        control_port->print ("| DC1 |");
+        control_port->print ("| DC1  |");
         control_port->println (millis());
       #endif
       if (DC_CONTROL_1_NORMAL_LOW) {digitalWrite(dc_control_1, HIGH);} else {digitalWrite(dc_control_1, LOW);}
@@ -227,10 +239,10 @@ bool disengage_ports() {
   } 
 
   if (DC_CONTROL_0_ENABLED) {
-    if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_0_DELAY_ON) && (bitRead(engagement_status, 4) == 1) ) {
+    if (((millis() - ptt_disengagement_time) >= delays.DC_CONTROL_0_DELAY_OFF) && (bitRead(engagement_status, 4) == 1) ) {
       #ifdef DEBUG
         control_port->print (ptt_disengagement_time);
-        control_port->print ("| DC0 |");
+        control_port->print ("| DC0  |");
         control_port->println (millis());
       #endif
       if (DC_CONTROL_0_NORMAL_LOW) {digitalWrite(dc_control_0, LOW);} else {digitalWrite(dc_control_0, HIGH);}
@@ -241,11 +253,11 @@ bool disengage_ports() {
     bitWrite(engagement_status, 4 ,0);
   } 
   
-  if (DC_CONTROL_0_ENABLED) {
-    if (((millis() - ptt_engagement_time) >= delays.DC_CONTROL_1_DELAY_ON) && (bitRead(engagement_status, 5) == 1) ) {
+  if (DC_CONTROL_1_ENABLED) {
+    if (((millis() - ptt_disengagement_time) >= delays.DC_CONTROL_1_DELAY_OFF) && (bitRead(engagement_status, 5) == 1) ) {
       #ifdef DEBUG
         control_port->print (ptt_disengagement_time);
-        control_port->print ("| DC1 |");
+        control_port->print ("| DC1  |");
         control_port->println (millis());
       #endif
       if (DC_CONTROL_1_NORMAL_LOW) {digitalWrite(dc_control_1, LOW);} else {digitalWrite(dc_control_1, HIGH);}

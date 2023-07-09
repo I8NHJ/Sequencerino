@@ -3,14 +3,14 @@
 #define ptt_in_1 3                            // Ground to activate
 
 /*-------- Sequenced PTT OUT pins definitions --------*/
-#define ptt_out_0 5                           // Grounded when active
-#define ptt_out_1 6
-#define ptt_out_2 7
-#define ptt_out_3 8
+#define ptt_out_0 4                           // Grounded when active
+#define ptt_out_1 5
+#define ptt_out_2 6
+#define ptt_out_3 7
 
 /*-------- DC OUT pins definitions --------*/
-#define dc_control_0 9                        // If enabled carries 12V when PTT active
-#define dc_control_1 10                       // If enabled carries 12V when PTT active
+#define dc_control_0 8                        // If enabled carries 12V when PTT active
+#define dc_control_1 9                       // If enabled carries 12V when PTT active
 
 /*-------- LEDs pins definitions --------*/
 #define ptt_in_0_engaged_led 11               // set to 0 to disable 

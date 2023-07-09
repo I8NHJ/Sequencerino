@@ -33,31 +33,31 @@ bool DC_CONTROL_1_NORMAL_LOW = false;
         DEBOUNCE_DELAY (milliseconds, configurable, debounce time to make sure PTT IN has been engaged) +
         machine_action_loops (microseconds, negligeble) +
         PTT_OUT_x_DELAY_ON or DC_CONTROL_x_DELAY_ON (milliseconds, configurable, your desidered delay) +
-        relay_operating_time and release_time (milliseconds, the delay of the relay or driving circuit of your choice)
+        relay_operating_time and release_time (milliseconds, the delay of the relay or driving circuit of your choice. JQC-3F5VDC-5 Operate Time < 10 ms, Release Time < 5 ms)
     This logic applies to both engage and disengage.
     If you need accurate delay us an oscilloscope or other lab devices to verify.
     Always BE CONSERVATIVE!
 */ 
 
 struct timing {
-  unsigned int PTT_IN_RATE = 10;
+  unsigned int PTT_IN_RATE = 0;
 
   unsigned int PTT_OUT_0_DELAY_ON = 0;
   unsigned int PTT_OUT_1_DELAY_ON = 1000;
   unsigned int PTT_OUT_2_DELAY_ON = 2000;
   unsigned int PTT_OUT_3_DELAY_ON = 3000;
-  unsigned int DC_CONTROL_0_DELAY_ON = 0;
-  unsigned int DC_CONTROL_1_DELAY_ON = 100;
+  unsigned int DC_CONTROL_0_DELAY_ON = 4000;
+  unsigned int DC_CONTROL_1_DELAY_ON = 5000;
   
-  unsigned int PTT_OUT_0_DELAY_OFF = 0;
-  unsigned int PTT_OUT_1_DELAY_OFF = 0;
-  unsigned int PTT_OUT_2_DELAY_OFF = 0;
-  unsigned int PTT_OUT_3_DELAY_OFF = 0;
-  unsigned int DC_CONTROL_0_DELAY_OFF = 0;
+  unsigned int PTT_OUT_0_DELAY_OFF = 600;
+  unsigned int PTT_OUT_1_DELAY_OFF = 500;
+  unsigned int PTT_OUT_2_DELAY_OFF = 400;
+  unsigned int PTT_OUT_3_DELAY_OFF = 300;
+  unsigned int DC_CONTROL_0_DELAY_OFF = 200;
   unsigned int DC_CONTROL_1_DELAY_OFF = 100;
   
   unsigned int SEQUENCE_LED_ON_TIME = 1000;
-  unsigned int DEBOUNCE_DELAY = 10;
+  unsigned int DEBOUNCE_DELAY = 5;
 };
 
 

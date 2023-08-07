@@ -18,12 +18,12 @@ bool PTT_OUT_3_ENABLED = true;
 bool DC_CONTROL_0_ENABLED = true;
 bool DC_CONTROL_1_ENABLED = true;
 
-bool PTT_OUT_0_NORMAL_LOW = false;
-bool PTT_OUT_1_NORMAL_LOW = false;
-bool PTT_OUT_2_NORMAL_LOW = false;
-bool PTT_OUT_3_NORMAL_LOW = false;
-bool DC_CONTROL_0_NORMAL_LOW = false;
-bool DC_CONTROL_1_NORMAL_LOW = false;
+bool PTT_OUT_0_NORMAL_LOW = true;
+bool PTT_OUT_1_NORMAL_LOW = true;
+bool PTT_OUT_2_NORMAL_LOW = true;
+bool PTT_OUT_3_NORMAL_LOW = true;
+bool DC_CONTROL_0_NORMAL_LOW = true;
+bool DC_CONTROL_1_NORMAL_LOW = true;
 
 /* TIMING CONFIGURATION 
   About timing between PTT IN closure and any PPT OUT or DC OUT closure:

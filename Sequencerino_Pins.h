@@ -13,10 +13,10 @@
 #define dc_control_1 9                       // If enabled carries 12V when PTT active
 
 /*-------- LEDs pins definitions --------*/
+#define sequence_completed_led 13             // Arduino built In LED  
+
 #define ptt_in_0_engaged_led 11               // set to 0 to disable 
 #define ptt_in_1_engaged_led 12            
-
-#define sequence_completed_led 13             // Arduino built In LED   
 
 #define ptt_out_0_engaged_led 14
 #define ptt_out_1_engaged_led 15

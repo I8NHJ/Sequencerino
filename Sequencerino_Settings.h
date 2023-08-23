@@ -42,19 +42,21 @@ bool DC_CONTROL_1_NORMAL_LOW = true;
 struct timing {
   unsigned int PTT_IN_RATE = 0;
 
-  unsigned int PTT_OUT_0_DELAY_ON = 0;
-  unsigned int PTT_OUT_1_DELAY_ON = 1000;
-  unsigned int PTT_OUT_2_DELAY_ON = 2000;
-  unsigned int PTT_OUT_3_DELAY_ON = 3000;
-  unsigned int DC_CONTROL_0_DELAY_ON = 4000;
-  unsigned int DC_CONTROL_1_DELAY_ON = 5000;
+  unsigned int PTT_OUT_0_DELAY_ON = 100;
+  unsigned int PTT_OUT_1_DELAY_ON = 50;
+  unsigned int PTT_OUT_2_DELAY_ON = 0;
+  unsigned int PTT_OUT_3_DELAY_ON = 0;
+
+  unsigned int DC_CONTROL_0_DELAY_ON = 0;
+  unsigned int DC_CONTROL_1_DELAY_ON = 0;
   
-  unsigned int PTT_OUT_0_DELAY_OFF = 600;
-  unsigned int PTT_OUT_1_DELAY_OFF = 500;
-  unsigned int PTT_OUT_2_DELAY_OFF = 400;
-  unsigned int PTT_OUT_3_DELAY_OFF = 300;
-  unsigned int DC_CONTROL_0_DELAY_OFF = 200;
-  unsigned int DC_CONTROL_1_DELAY_OFF = 100;
+  unsigned int PTT_OUT_0_DELAY_OFF = 0;
+  unsigned int PTT_OUT_1_DELAY_OFF = 10;
+  unsigned int PTT_OUT_2_DELAY_OFF = 0;
+  unsigned int PTT_OUT_3_DELAY_OFF = 0;
+
+  unsigned int DC_CONTROL_0_DELAY_OFF = 20;
+  unsigned int DC_CONTROL_1_DELAY_OFF = 25;
   
   unsigned int SEQUENCE_LED_ON_TIME = 1000;
   unsigned int DEBOUNCE_DELAY = 5;
